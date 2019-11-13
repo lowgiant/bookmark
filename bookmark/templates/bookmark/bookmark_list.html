@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>북마크 목록</title>
+</head>
+<body>
+<div class="btn-group">
+    <a href="add" class="btn btn-info">Add Bookmark</a>
+</div>
+
+<p></p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">사이트</th>
+        <th scope="col">URL</th>
+        <th scope="col">수정</th>
+        <th scope="col">삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bookmark in object_list %}
+    <tr>
+        <td>
+            {{ forloop.counter }}
+        </td>
+        <td>
+            <a href="detail/{{ bookmark.id }}">{{ bookmark.site_name }}</a>
+        </td>
+        <td>
+            <a href="{{ bookmark.url }}">{{ bookmark.url }}</a>
+        </td>
+        <td>
+            <a href="update/{{ bookmark.id }}" class="btn btn-success">수정</a>
+        </td>
+        <td>
+            <a href="delete/{{ bookmar.id }}" class="btn btn-danger">삭제</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
