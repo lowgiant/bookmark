@@ -1,47 +1,84 @@
+{% extends 'Base.html' %}
+{% block title %}북마크 목록{% endblock %}
+
+{% block content %}
+<div class="btn-group">
+        <a href="add" class="btn btn-info">Add Bookmark</a>
+    </div>
+
+    <p></p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">사이트</th>
+            <th scope="col">URL</th>
+            <th scope="col">수정</th>
+            <th scope="col">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bookmark in object_list %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                <a href="detail/{{ bookmark.id }}">{{ bookmark.site_name }}</a>
+            </td>
+            <td>
+                <a href="{{ bookmark.url }}">{{ bookmark.url }}</a>
+            </td>
+            <td>
+                <a href="update/{{ bookmark.id }}" class="btn btn-success">수정</a>
+            </td>
+            <td>
+                <a href="delete/{{ bookmark.id }}" class="btn btn-danger">삭제</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_paginated %}
+      <ul class="pagination justify-content-center pagination-sm">
+          {% if page_obj.has_previous %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+              </li>
+          {% else %}
+              <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>
+          {% endif %}
+          {% for object in page_obj.paginator.page_range %}
+              <li class="page-item {% if page_obj.number == forloop.counter %}disabled{% endif %}">
+                  <a class="page-link" href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+              </li>
+          {% endfor %}
+          {% if page_obj.has_next %}
+              <li class="page-item">
+                  <a class="page-link" href="{% url 'list' %}?page={{ page_obj.next_page_number }}">Next</a>
+              </li>
+          {% else %}
+              <li class="page-item disabled">
+                  <a class="page-link" href="#">Next</a>
+              </li>
+          {% endif %}
+      </ul>
+  {% endif %}
+
+</div>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>북마크 목록</title>
+    <title></title>
 </head>
 <body>
-<div class="btn-group">
-    <a href="add" class="btn btn-info">Add Bookmark</a>
-</div>
+<div class="container">
 
-<p></p>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">사이트</th>
-        <th scope="col">URL</th>
-        <th scope="col">수정</th>
-        <th scope="col">삭제</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for bookmark in object_list %}
-    <tr>
-        <td>
-            {{ forloop.counter }}
-        </td>
-        <td>
-            <a href="detail/{{ bookmark.id }}">{{ bookmark.site_name }}</a>
-        </td>
-        <td>
-            <a href="{{ bookmark.url }}">{{ bookmark.url }}</a>
-        </td>
-        <td>
-            <a href="update/{{ bookmark.id }}" class="btn btn-success">수정</a>
-        </td>
-        <td>
-            <a href="delete/{{ bookmark.id }}" class="btn btn-danger">삭제</a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
 </body>
 </html>

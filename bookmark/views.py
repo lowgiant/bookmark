@@ -6,6 +6,7 @@ from .models import Bookmark
 # Create your views here.
 class BookmarkListView(ListView):
     model = Bookmark
+    paginate_by = 3
     fields =['site_name', 'url']
     success_url = reverse_lazy('list')
 

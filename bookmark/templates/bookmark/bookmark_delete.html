@@ -1,14 +1,20 @@
+{% extends 'Base.html' %}
+{% block title %}북마크 삭제{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="alert alert-danger">북마크를 삭제 하시겠습니까? {{ object }}</div>
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>북마크 삭제</title>
+    <title></title>
 </head>
 <body>
-    <form action="" method="post">
-        {%  csrf_token %}
-        <div class ="alert alert-danger">북마크를 삭제 하시겠습니까? {{ object }}</div>
-        <input type = "submit" value="Delete" class ="btn btn-danger">
-    </form>
+
 </body>
 </html>

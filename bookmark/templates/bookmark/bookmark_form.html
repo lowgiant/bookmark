@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+
+{% extends 'Base.html' %}
+{% block title %} 북마크 {% endblock %}
+{% block content %}
+
 <form action ="", method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type ="submit", value="Add" class ="btn btn-info btn-sm">
 </form>
 </body>
-</html>
+
+{% endblock %}
